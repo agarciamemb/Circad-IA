@@ -327,7 +327,8 @@ audio {
     padding: 1rem;  /* menos aire dentro */
   }
   main {
-    padding: 1rem;            /* reduce espacio alrededor de la card */
+    justify-content: flex-start;  /* card arriba, no centrada */
+    padding-top: 0.5rem;          /* ajusta el espacio superior */
   }
   .card {
     padding: 1.5rem 0.5rem;     /* menos relleno interno */
