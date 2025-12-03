@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Circad·IA — Prototipo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="amanecer">
+  <div class="app" id="app">
+    <!-- Área principal -->
+    <div class="main-content">
+      <div class="topbar">
+        <div class="logo">
+          <img src="images/circadia_logo.svg" alt="Logo Circad·IA" class="logo-mark">
+          <span class="logo-text">Circad·IA</span>
+        </div>
+        <div class="menu-icon" id="menuToggle">☰</div>
+      </div>
+
+      <header id="banner">La tecnología no es neutra. Es parte de la experiencia biológica.</header>
+
+      <main>
+        <div class="card">
+          <img id="phaseImage" src="images/amanecer.png" alt="Imagen de fase" class="phase-image">
+          <h1 id="title">Aurora suave</h1>
+          <h2 id="subtitle">Despertar gradual</h2>
+
+          <div class="controls">
+            <button id="prev" class="phase-btn" aria-label="Fase anterior" title="Fase previa">◀</button>
+            <select id="fase" aria-label="Selector de fase">
+              <option data-title="Aurora suave" data-sub="Despertar gradual" data-class="amanecer" data-img="images/amanecer.png">🌅 Amanecer</option>
+              <option data-title="Foco intenso" data-sub="Actividad crítica" data-class="mediodia" data-img="images/mediodia.png">☀️ Mediodía</option>
+              <option data-title="Transición suave" data-sub="Recuperación serena" data-class="atardecer" data-img="images/atardecer.png">🌇 Atardecer</option>
+              <option data-title="Pausa profunda" data-sub="Restauración metabólica" data-class="noche" data-img="images/noche.png">🌙 Noche</option>
+            </select>
+            <button id="next" class="phase-btn" aria-label="Fase siguiente" title="Fase siguiente">▶</button>
+          </div>
+
+          <audio id="audio" preload="metadata" controls>
+            <source src="songs/amanecer/track01.mp3" type="audio/mpeg" />
+            Tu navegador no soporta el elemento audio.
+          </audio>
+
+<div id="trackContainer">
+  <p id="trackName">🎧 Rendimiento alto</p>
+  <button id="nextSongBtn" class="song-btn" aria-label="Cambiar de canción" title="Siguiente canción">⏭</button>
+</div>
+
+
+        </div>
+      </main>
+    </div>
+
+    <!-- Panel lateral -->
+    <aside class="menu-panel" id="menuPanel">
+      <div class="topbar">
+        <div class="logo">
+          <span class="logo-text">Menú</span>
+        </div>
+        <button class="menu-icon close-btn" onclick="document.getElementById('app').classList.remove('menu-open')">✖</button>
+      </div>
+      
+      <ul>
+        <li><button onclick="loadSection('intensidad')">🎚️ Intensidad</button></li>
+        <li><button onclick="loadSection('estilo')">🎵 Estilo musical</button></li>
+        <li><button onclick="loadSection('idioma')">🌐 Idioma</button></li>
+        <li><button onclick="loadSection('interfaz')">🎨 Interfaz</button></li>
+        <li><button onclick="loadSection('acerca_de')">ℹ️ Acerca de</button></li>
+      </ul>
+
+      <div id="panelContent">
+        <p></p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Botón de paleta -->
+  <button id="paletteBtn" class="palette-btn" title="Cambia la interfaz">🎨</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+body {
+  margin: 0;
+  font-family: 'Quicksand', system-ui, sans-serif;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: background 2s ease;
+  position: relative;
+  overflow: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: brightness(0.96) contrast(1.05);
+  z-index: 0;
+}
+
+/* Variables de color por fase */
+body.amanecer { --fase-bg: #4a90e2; --fase-text: #fff; }
+body.mediodia { --fase-bg: #e9b125; --fase-text: #fff; }
+body.atardecer { --fase-bg: #d0665b; --fase-text: #fff; }
+body.noche    { --fase-bg: #1b1f3b; --fase-text: #fff; }
+
+/* Botones de fase */
+body.amanecer .phase-btn { color: #4a90e2; }
+body.mediodia .phase-btn { color: #e67e22; }
+body.atardecer .phase-btn { color: #d0665b; }
+body.noche .phase-btn    { color: #3949ab; }
+.phase-btn:hover { color: #fff !important; }
+
+/* Estructura principal de la app */
+.app {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  transition: all 0.3s ease;
+}
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Topbar y logo */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  z-index: 10;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo-mark {
+  height: 1.8rem;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+  margin-right: 0.5rem;
+}
+.logo-text {
+  font-weight: 100;
+  font-size: 2.2rem;
+}
+
+/* Menú Toggle */
+.menu-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  z-index: 60; 
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 0.5rem;
+}
+.menu-icon:hover { opacity: 0.8; }
+
+/* Banner superior */
+#banner {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+  z-index: 10;
+  position: relative;
+}
+
+/* Contenido principal y tarjeta (card) */
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  z-index: 10;
+  position: relative;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  max-width: 460px;
+  width: 100%;
+}
+
+/* Estilo de la imagen de fase */
+.phase-image {
+  width: 100%;
+  max-width: 120px; 
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 0.75rem;
+  transition: all 0.5s ease;
+  border: 2px solid white;
+}
+
+/* Títulos y subtítulos */
+#title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+#subtitle {
+  margin: 0.5rem 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+#trackName {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 0.25rem;
+}
+
+/* Controles */
+.controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
+}
+#fase {
+  font-family: 'Quicksand', system-ui, sans-serif;
+  padding: 0.5rem 1rem;
+  border-radius: 5.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  appearance: none; 
+  text-align: center;
+}
+#fase option {
+  color: #222;
+  background-color: #f1f3f4;
+  text-align: left;
+}
+.phase-btn {
+  font-size: 1.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f1f3f4 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+#prev { padding-left: 5px; }
+#next { padding-right: 5px; }
+.phase-btn:hover { transform: translateY(-1px); }
+
+/* Audio */
+audio {
+  width: 90%;
+  margin-top: 2.5rem; 
+  filter: saturate(1.02);
+  accent-color: var(--fase-bg);
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Gradientes animados por fase */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.amanecer {
+  background-image: radial-gradient(circle at center,#99c1ef,#357abd,#0d62cd);
+  background-size: 300% 300%;
+  animation: gradientShift 18s ease infinite;
+}
+.mediodia {
+  background-image: radial-gradient(circle at center,#ffc363,#fc8815,#de7000);
+  background-size: 300% 300%;
+  animation: gradientShift 8s ease infinite;
+}
+.atardecer {
+  background-image: radial-gradient(circle at center,#ff8a65,#e64a19,#b71c1c);
+  background-size: 300% 300%;
+  animation: gradientShift 18s ease infinite;
+}
+.noche {
+  background-image: radial-gradient(circle at center,#3949ab,#1a237e,#0d0d0d);
+  background-size: 300% 300%;
+  animation: gradientShift 25s ease infinite;
+}
+
+/* Panel lateral */
+.menu-panel {
+  width: 0;
+  background: #f1f3f4;
+  color: #222;
+  overflow-x: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 50;
+  transition: width 0.3s ease, transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: -4px 0 8px rgba(0,0,0,0.2);
+}
+.menu-panel .topbar {
+  background-color: #fff;
+  border-bottom: none; 
+}
+.menu-panel .logo-text {
+  color: #222;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.menu-panel .menu-icon.close-btn {
+  font-size: 1.2rem;
+  color: #222;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.menu-panel ul {
+  order: 1;
+  list-style: none;
+  padding: 1rem 1.5rem;
+  margin: 0;
+}
+.menu-panel ul li { margin-bottom: 0.75rem; }
+.menu-panel ul li button {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  color: #4a90e2;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+  font-family: 'Quicksand', system-ui, sans-serif;
+}
+.menu-panel ul li button:hover { background: #e6e6e6; }
+#panelContent {
+  order: 2;
+  padding: 1.5rem;
+  color: #555;
+  overflow-y: auto;
+}
+#panelContent h3 { color: #222; margin-top: 0; font-size: 1.5rem; }
+#panelContent p { line-height: 1.6; }
+
+/* Estado abierto */
+.app.menu-open .menu-panel { width: 80%; transform: translateX(0); }
+@media (min-width: 768px) {
+  .app.menu-open .main-content { width: 70%; }
+  .app.menu-open .menu-panel { width: 30%; position: static; }
+}
+@media (max-width: 767px) {
+  .app.menu-open .main-content {
+    transform: translateX(-10%);
+    box-shadow: -4px 0 8px rgba(0,0,0,0.2);
+  }
+  .app.menu-open .menu-panel {
+    width: 80%;
+    transform: translateX(0);
+    box-shadow: -4px 0 8px rgba(0,0,0,0.2);
+  }
+  .menu-panel { transform: translateX(100%); }
+}
+@media (max-width: 600px) {
+  .card { padding: 1.5rem 1rem; }
+  #title { font-size: 1.5rem; }
+  #subtitle { font-size: 1rem; }
+  .phase-image { max-width: 100px; margin-bottom: 0.5rem; }
+}
+
+/* Botón de paleta fijo y visible */
+.palette-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10000;
+  pointer-events: auto;
+  background: #eee;
+  color: #222;
+  border: 1px solid rgba(0,0,0,0.25);
+  border-radius: 2rem;
+  padding: 0.8rem 0.8rem;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+/* Estado alternativo de la tarjeta */
+.card.alt {
+  background: #f1f3f4;
+  color: #222;
+  border: 1px solid #d0d4d8;
+}
+.card.alt .phase-image { border: 0px solid var(--fase-bg); }
+.card.alt #title,
+.card.alt #subtitle { color: var(--fase-bg); }
+.card.alt .phase-btn { color: var(--fase-bg) !important; }
+.card.alt .phase-btn:hover { color: #222 !important; }
+.card.alt #fase {
+  border: 1px solid var(--fase-bg);
+  background: #fff;
+  color: #222;
+}
+
+/* Alternativa global */
+body.alt-interface .card {
+  background: #ffffff;
+  color: #222;
+  border: 1px solid #cfd3d7;
+}
+
+
+/* ===== MODO ALTO CONTRASTE ===== */
+body.high-contrast {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+body.high-contrast .card {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+
+body.high-contrast #title,
+body.high-contrast #subtitle,
+body.high-contrast #trackName {
+  color: #fff !important;
+}
+
+body.high-contrast .phase-btn {
+  color: #fff !important;
+  border: 0px solid #fff !important;
+}
+
+body.high-contrast #fase {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #fff !important;
+}
+
+body.high-contrast audio {
+  filter: none !important;
+  accent-color: #fff !important;
+}
+
+/* Menú lateral en alto contraste */
+body.high-contrast .menu-panel {
+  background: #000 !important;
+  color: #fff !important;
+  border-left: 2px solid #fff !important;
+}
+
+body.high-contrast .menu-panel .topbar {
+  background: #000 !important;
+  color: #fff !important;
+  border-bottom: 1px solid #fff !important;
+}
+
+body.high-contrast .menu-panel .logo-text,
+body.high-contrast .menu-panel .menu-icon {
+  color: #fff !important;
+}
+
+body.high-contrast .menu-panel ul li button {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #fff !important;
+}
+
+body.high-contrast #panelContent {
+  color: #fff !important;
+}
+
+body.high-contrast #panelContent h3 {
+  color: #fff !important;
+}
+
+.song-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+/* Alto contraste: ya es blanco, no necesita cambio */
+body.high-contrast .song-btn {
+  color: #fff !important;
+}
+
+#trackContainer {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.card.alt .song-btn {
+  color: #222;   /* negro/gris oscuro */
+}
+
