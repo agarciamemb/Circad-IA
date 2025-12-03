@@ -321,6 +321,10 @@ audio {
   #title { font-size: 1.5rem; }
   #subtitle { font-size: 1rem; }
   .phase-image { max-width: 100px; margin-bottom: 0.5rem; }
+    #banner {
+    font-size: 1.1rem;       /* más pequeño que el 1.5rem actual */
+    margin-bottom: 0rem;   /* reduce la distancia con la card */
+  }
 }
 
 /* Botón de paleta fijo y visible */
