@@ -214,9 +214,9 @@ const sectionsContent = {
   idioma: `<h3>🌐 Idioma</h3>
     <p>Selecciona el idioma de la interfaz:</p>
     <ul>
-      <li><button class="lang-btn" data-lang="en">🇬🇧 Inglés</button></li>
       <li><button class="lang-btn" data-lang="es">🇪🇸 Español</button></li>
-      <li><button class="lang-btn" data-lang="ca">🇨🇦 Català</button></li>
+      <li><button class="lang-btn" data-lang="en">🇬🇧 Inglés</button></li>
+      <li><button class="lang-btn" data-lang="fr">🇫🇷 Francés</button></li>
     </ul>`,
 
   interfaz: `<h3>🎨 Interfaz</h3>
