@@ -217,7 +217,6 @@ const sectionsContent = {
       <li><button class="lang-btn" data-lang="es">🇪🇸 Español</button></li>
       <li><button class="lang-btn" data-lang="en">🇬🇧 Inglés</button></li>
       <li><button class="lang-btn" data-lang="fr">🇫🇷 Francés</button></li>
-      <li><button class="lang-btn" data-lang="fr">🇫🇷 Francés</button></li>
     </ul>`,
 
   interfaz: `<h3>🎨 Interfaz</h3>
