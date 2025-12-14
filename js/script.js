@@ -229,7 +229,7 @@ const sectionsContent = {
   acerca_de: `<h3>ℹ️ Acerca de</h3>
   <p><strong>Circad·IA</strong> es un prototipo sonoro adaptativo que explora la relación entre ritmos biológicos y música generada por IA.</p>
   <h4>⚖️ Ética y valores</h4>
-  <ul>
+  <ul class="acerca-valores">
     <li>Respeto a la diversidad cultural y lingüística.</li>
     <li>Transparencia en el uso de la IA y sus límites.</li>
     <li>Sostenibilidad digital y eficiencia energética.</li>

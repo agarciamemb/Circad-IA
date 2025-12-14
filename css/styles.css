@@ -471,3 +471,15 @@ body.high-contrast .song-btn {
   color: #222;   /* negro/gris oscuro */
 }
 
+.acerca-valores li {
+  position: relative;
+}
+
+.acerca-valores li::before {
+  content: "■";
+  font-size: 0.4em;
+  display: inline-block;
+  vertical-align: middle;   /* centra con el texto */
+  margin-right: 0.8em;      /* espacio a la derecha */
+  color: #666;            /* opcional: color del cuadrado */
+}
