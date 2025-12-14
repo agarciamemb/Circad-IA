@@ -228,14 +228,6 @@ const sectionsContent = {
 
   acerca_de: `<h3>ℹ️ Acerca de</h3>
   <p><strong>Circad·IA</strong> es un prototipo sonoro adaptativo que explora la relación entre ritmos biológicos y música generada por IA.</p>
-  <h4>📖 Capítulos de la memoria</h4>
-  <ul>
-    <li><strong>Introducción:</strong> Contexto del proyecto y objetivos.</li>
-    <li><strong>Marco teórico:</strong> Ritmos circadianos, música generativa y tecnologías adaptativas.</li>
-    <li><strong>Metodología:</strong> Diseño de la interfaz, selección de fases y lógica sonora.</li>
-    <li><strong>Resultados:</strong> Experiencias de usuario y validación del prototipo.</li>
-    <li><strong>Discusión:</strong> Limitaciones, aprendizajes y proyección futura.</li>
-  </ul>
   <h4>⚖️ Ética y valores</h4>
   <ul>
     <li>Respeto a la diversidad cultural y lingüística.</li>
