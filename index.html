@@ -16,24 +16,24 @@
           <img src="images/circadia_logo.svg" alt="Logo Circad·IA" class="logo-mark">
           <span class="logo-text">Circad·IA</span>
         </div>
-        <div class="menu-icon" id="menuToggle">☰</div>
+        <button class="menu-icon" id="menuToggle" aria-label="Abrir menú" aria-controls="menuPanel" aria-expanded="false">☰</button>
       </div>
 
-      <header id="banner">La tecnología no es neutra. Es parte de la experiencia biológica.</header>
+      <header id="banner" data-i18n="banner.default">La tecnología no es neutra. Es parte de la experiencia biológica.</header>
 
       <main>
         <div class="card">
-          <img id="phaseImage" src="images/amanecer.png" alt="Imagen de fase" class="phase-image">
+          <img id="phaseImage" src="images/amanecer.webp" alt="Imagen de fase" class="phase-image">
           <h1 id="title">Aurora suave</h1>
           <h2 id="subtitle">Despertar gradual</h2>
 
           <div class="controls">
             <button id="prev" class="phase-btn" aria-label="Fase anterior" title="Fase previa">◀</button>
             <select id="fase" aria-label="Selector de fase">
-              <option data-title="Aurora suave" data-sub="Despertar gradual" data-class="amanecer" data-img="images/amanecer.png">🌅 Amanecer</option>
-              <option data-title="Foco intenso" data-sub="Actividad crítica" data-class="mediodia" data-img="images/mediodia.png">☀️ Mediodía</option>
-              <option data-title="Transición suave" data-sub="Recuperación serena" data-class="atardecer" data-img="images/atardecer.png">🌇 Atardecer</option>
-              <option data-title="Pausa profunda" data-sub="Restauración metabólica" data-class="noche" data-img="images/noche.png">🌙 Noche</option>
+              <option data-title="Aurora suave" data-sub="Despertar gradual" data-class="amanecer" data-img="images/amanecer.webp">🌅 Amanecer</option>
+              <option data-title="Foco intenso" data-sub="Actividad crítica" data-class="mediodia" data-img="images/mediodia.webp">☀️ Mediodía</option>
+              <option data-title="Transición suave" data-sub="Recuperación serena" data-class="atardecer" data-img="images/atardecer.webp">🌇 Atardecer</option>
+              <option data-title="Pausa profunda" data-sub="Restauración metabólica" data-class="noche" data-img="images/noche.webp">🌙 Noche</option>
             </select>
             <button id="next" class="phase-btn" aria-label="Fase siguiente" title="Fase siguiente">▶</button>
           </div>
@@ -50,6 +50,14 @@
 
 
         </div>
+
+        <!-- HUD de estado (hora local / rango / modo)
+             En escritorio se fija abajo a la izquierda. En móvil se muestra debajo de la card. -->
+        <div id="liveTime" class="meta-hud" aria-live="polite" role="button" tabindex="0" aria-label="Mostrar u ocultar estado">
+          <div id="hudContent" class="hud-content"></div>
+          <!-- Asa única: cambia de « (abierto) a » (cerrado). En móvil se oculta. -->
+          <div class="hud-handle" aria-hidden="true">«</div>
+        </div>
       </main>
     </div>
 
@@ -63,11 +71,11 @@
       </div>
       
       <ul>
-        <li><button onclick="loadSection('intensidad')">🎚️ Intensidad</button></li>
-        <li><button onclick="loadSection('estilo')">🎵 Estilo musical</button></li>
-        <li><button onclick="loadSection('idioma')">🌐 Idioma</button></li>
-        <li><button onclick="loadSection('interfaz')">🎨 Interfaz</button></li>
-        <li><button onclick="loadSection('acerca_de')">ℹ️ Acerca de</button></li>
+        <li><button onclick="loadSection('intensidad')">🎚️ <span data-i18n="menu.intensity">Intensidad</span></button></li>
+        <li><button onclick="loadSection('estilo')">🎵 <span data-i18n="menu.style">Estilo musical</span></button></li>
+        <li><button onclick="loadSection('idioma')">🌐 <span data-i18n="menu.language">Idioma</span></button></li>
+        <li><button onclick="loadSection('interfaz')">🎨 <span data-i18n="menu.ui">Interfaz</span></button></li>
+        <li><button onclick="loadSection('acerca_de')">ℹ️ <span data-i18n="menu.about">Acerca de</span></button></li>
       </ul>
 
       <div id="panelContent">

@@ -87,9 +87,16 @@ body.noche .phase-btn    { color: #3949ab; }
   padding: 0.5rem;
 }
 .menu-icon:hover { opacity: 0.8; }
+.menu-icon:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
 
 /* Banner superior */
 #banner {
+  position: relative;
+  z-index: 40;
   text-align: center;
   padding: 0.5rem 1rem;
   margin-top: 0;
@@ -122,6 +129,154 @@ main {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   max-width: 460px;
   width: 100%;
+}
+
+/* HUD de estado (hora local / rango / modo)
+   - Escritorio: flotante abajo-izquierda
+   - Móvil: en flujo, debajo de la card y centrado
+*/
+.meta-hud {
+  position: fixed;
+  left: 0rem;
+  bottom: 1.25rem;
+  z-index: 60;
+
+  width: 300px;
+
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  padding: 0.55rem 0.85rem;
+  /* border-radius: 15px; */
+  /* Opaco: sin transparencia (desktop y móvil) */
+  background: #ffffff;
+  color: #374151; /* gris oscuro */
+
+  font-size: 1rem;
+  font-weight: 500;
+
+  line-height: 1.75;
+
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+
+  /* Mantengo el blur por si en el futuro vuelves a usar alpha; con fondo opaco no afecta visualmente */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  pointer-events: auto;
+  cursor: pointer;
+  text-align: left;
+}
+
+.meta-hud .meta-line {
+  display: block;
+  white-space: nowrap;
+}
+
+/* Contenido interno del HUD (panel deslizable) */
+/* Panel deslizable: el asa está a la derecha (siempre visible cuando está colapsado) */
+.meta-hud {
+  position: fixed;
+  transform: translateX(0);
+  transition: transform 220ms ease;
+  padding-right: 2.4rem; /* espacio para el asa derecha */
+}
+
+.meta-hud.collapsed {
+  /* deja visible un asa para reabrir (ancho del handle + pequeño margen) */
+  transform: translateX(calc(-100% + 44px));
+}
+
+.meta-hud .hud-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+.meta-hud .hud-handle { right: 0; }
+
+.meta-hud .hud-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  text-align: left;
+  align-items: flex-start;
+}
+
+/* Aviso breve (toast) dentro del HUD */
+.meta-hud .meta-toast {
+  animation: metaToastFade 2s ease-in-out;
+}
+
+@keyframes metaToastFade {
+  0% { opacity: 0; transform: translateY(4px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Aviso breve (toast) dentro del HUD */
+.meta-hud .meta-toast {
+  animation: metaToastFade 2s ease-in-out;
+}
+
+@keyframes metaToastFade {
+  0% { opacity: 0; transform: translateY(4px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Alto contraste */
+body.high-contrast .meta-hud {
+  background: #ffffff;
+  color: #111827;
+  box-shadow: none;
+  outline: 2px solid #111827;
+  outline-offset: 2px;
+}
+
+/* Responsive: deja de ser flotante y pasa debajo de la card */
+@media (max-width: 900px) {
+  #banner { font-size: 1.1rem; padding: 0.75rem 1rem; 
+    margin-bottom: 0.75rem;
+  }
+  main { flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 1.75rem; }
+  .card { margin-top: 0.5rem; }
+
+  /* En móvil, el <main> debe apilar (card arriba + HUD debajo).
+     Si se mantiene en fila, el HUD acaba "al lado" de la card. */
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .meta-hud {
+    position: static;
+    margin: 1rem auto 0;
+    border-radius: 1rem;
+    width: min(300px, calc(100% - 2rem));
+    max-width: calc(100% - 2rem);
+    text-align: left;
+  }
+
+  .meta-hud .meta-line {
+    white-space: normal;
+  }
+  .meta-hud { transform: none !important; cursor: default; padding-right: 0.85rem; }
+  /* En móvil no debe verse ningún asa («/») */
+  .meta-hud .hud-handle { display: none !important; }
+  .meta-hud .hud-content { text-align: left; align-items: flex-start; }
+
 }
 
 /* Estilo de la imagen de fase */
@@ -323,12 +478,12 @@ audio {
   .phase-image { max-width: 100px; margin-bottom: 0.5rem; }
   #banner {
     font-size: 1rem;
-    margin-bottom: -5.0rem;   /* aún más cerca */
-    padding: 1rem;  /* menos aire dentro */
+    margin-bottom: 1rem;
+    padding: 1rem;
   }
   main {
     justify-content: flex-start;  /* card arriba, no centrada */
-    padding-top: 0.5rem;          /* ajusta el espacio superior */
+    padding-top: 1rem;            /* deja aire para el banner */
   }
   .card {
     padding: 1.5rem 0.5rem;     /* menos relleno interno */
@@ -483,3 +638,4 @@ body.high-contrast .song-btn {
   margin-right: 0.8em;      /* espacio a la derecha */
   color: #666;            /* opcional: color del cuadrado */
 }
+
